@@ -1,0 +1,29 @@
+Install nodemon locally with npm:
+
+npm install nodemon --save-dev
+
+installing jsnode
+npm install nodenpm
+
+express for node install
+npm install express
+
+local install of supervisor
+npm install supervisor --save-dev
+
+js express
+$ npm install express
+
+npm run serve 
+
+npm start or npx nodemon
+
+Install the node.js Pug packages
+npm install pug
+
+Rebuild your containers with the changes
+
+Also is containers are being glitchy rebuild!!! and it should resolve issues
+
+docker-compose up --build
+
