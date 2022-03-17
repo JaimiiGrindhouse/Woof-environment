@@ -10,37 +10,68 @@ app.use(express.static("static"));
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
-// Create a route for root - /
+const { Owner } = require('./models/owner')
+
+// handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
     res.send("Oh hey there world");
 });
 
-// Create a route for testing the db
-app.get("/db_test", function(req, res) {
-    // Assumes a table called test_table exists in your database
-    sql = 'select * from test_table';
+// handler 2 - all areas in a json format
+app.get("/all-areas", function(req, res) {
+    sql = 'select * from areas';
     db.query(sql).then(results => {
         console.log(results);
-        res.send(results)
+        res.send(results);
     });
 });
 
-// Create a route for /goodbye
-// Responds to a 'GET' request
-app.get("/goodbye", function(req, res) {
-    res.send("Goodbye world!");
+//handler 3 - all areas formatted in a nice table. 
+app.get("/all-areas-formatted", function(req, res) {
+    sql = 'select * from areas';
+    var output = '<table border="1px">';
+    db.query(sql).then(results => {
+        for (var row of results) {
+            output += '<tr>';
+            output += '<td>' + row.area_ID + '</td>';
+            output += '<td>' + row.area_name + '</td>';
+            output += '</tr>'
+        }
+        output += '</table>';
+        console.log(output);
+        res.send(output);
+    });
 });
 
-// Create a dynamic route for /hello/<name>, where name is any value provided by user
-// At the end of the URL
-// Responds to a 'GET' request
-app.get("/hello/:name", function(req, res) {
-    // req.params contains any parameters in the request
-    // We can examine it in the console for debugging purposes
-    console.log(req.params);
-    //  Retrieve the 'name' parameter and use it in a dynamically generated page
-    res.send("Hello " + req.params.name);
+//handler 4 - all owners formatted in a  table. 
+app.get("/all-owners-formatted", function(req, res) {
+    sql = 'select * from owners';
+    var output = '<table border="1px">';
+    db.query(sql).then(results => {
+        for (var row of results) {
+            output += '<tr>';
+            output += '<td>' + row.person_ID + '</td>';
+            output += '<td>' + row.person_name + '</td>';
+            output += '<td>' + row.email + '</td>';
+            output += '<td>' + row.phone_no + '</td>';
+            output += '</tr>'
+        }
+        output += '</table>';
+        console.log(output);
+        res.send(output);
+    });
 });
+
+/*
+// this part is not working yet
+app.get("/single-owner/:id", async function (req, res) {
+    var ownerId = req.params.person_id;
+    // Create a student class with the ID passed
+    var owner = new Owner(ownerId);
+    await getOwnerName();
+    console.log(owner);
+    res.render('owner', {owner:owner});
+}); */
 
 // Start server on port 3000
 app.listen(3000,function(){
