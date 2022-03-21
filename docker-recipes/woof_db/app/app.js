@@ -85,6 +85,11 @@ app.get("/single-owner/:id", async function (req, res) {
     // Create a student class with the ID passed
     var owner = new Owner(ownerId);
     await owner.getOwnerName();
+    await owner.getOwnerEmail();
+    await owner.getOwnerPhone();
+    await owner.getOwnerArea();
+
+
     console.log(owner);
     res.render('owner', {owner:owner});
 });

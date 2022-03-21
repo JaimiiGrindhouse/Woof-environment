@@ -52,16 +52,18 @@ class Owner {
             JOIN owners o ON a.area_ID = o.area_ID \
             where person_ID = ?"
             const results = await db.query(sql, [this.id]);
-            this.area = new Area(results[0].programme);
-            this.owner_area = results[0].area;
+            this.area = new Area(results[0].area);
+            this.area = results[0].area;
         }
     }
-
+/*
     // LEAVING THIS FUNCTION EMPTY FOR NOW.
     async getOwnerPicture() {
 
     }
+    */
 }
+
 
 module.exports = {
     Owner
