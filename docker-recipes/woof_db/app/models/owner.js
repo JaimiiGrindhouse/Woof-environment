@@ -54,7 +54,7 @@ class Owner {
             const results = await db.query(sql, [this.id]);
             console.log(results);
             this.area = new Area(results[0].area_name);
-            //this.area = results[0].area;
+            this.area = results[0].area_name;
         }
     }
 /*
