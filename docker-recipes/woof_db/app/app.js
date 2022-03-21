@@ -7,10 +7,14 @@ var app = express();
 // Add static files location
 app.use(express.static("static"));
 
+// Use the Pug templating engine
+app.set('view engine', 'pug');
+app.set('views', './app/views');
+
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
-const { Owner } = require('./models/owner')
+const { Owner } = require('./models/owner');
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -62,16 +66,28 @@ app.get("/all-owners-formatted", function(req, res) {
     });
 });
 
-/*
-// this part is not working yet
+/*// this part is not working yet
+app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id and not person_ID. I checked it in the console. 
+    var ownerId = req.params.id; // it has to be .id and not person_ID. 
+    var ownerSql = 'SELECT * from owners where person_ID = ?'
+    db.query(ownerSql, [ownerId]).then(results => {
+        console.log(results);
+        res.send(results);
+    });
+
+
+}); 
+*/
+
+ // this part is not working yet
 app.get("/single-owner/:id", async function (req, res) {
-    var ownerId = req.params.person_id;
+    var ownerId = req.params.id;
     // Create a student class with the ID passed
     var owner = new Owner(ownerId);
-    await getOwnerName();
+    await owner.getOwnerName();
     console.log(owner);
     res.render('owner', {owner:owner});
-}); */
+});
 
 // Start server on port 3000
 app.listen(3000,function(){

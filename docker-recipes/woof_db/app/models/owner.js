@@ -1,6 +1,6 @@
 const db = require('./../services/db');
 
-const { dog } = require('./dog');
+const { Dog } = require('./dog');
 const { Area } = require('./area');
 
 class Owner {
@@ -18,7 +18,7 @@ class Owner {
     picture;
 
     constructor(id) {
-        this.id = person_ID;
+        this.id = id;
     }
 
     async getOwnerName() {

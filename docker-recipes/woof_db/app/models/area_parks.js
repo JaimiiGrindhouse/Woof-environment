@@ -12,8 +12,8 @@ class Area_Parks {
     //area name
     area_name;
 
-    constructor(park_ID) {
-        this.id = park_ID;
+    constructor(id) {
+        this.id = id;
     }
 
     async getParkName() {

@@ -14,7 +14,7 @@ class Dog {
     picture;
 
     constructor(id) {
-        this.id = person_ID;
+        this.id = id;
     }
 
     async getDogName() {

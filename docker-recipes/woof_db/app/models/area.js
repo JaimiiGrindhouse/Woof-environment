@@ -7,7 +7,7 @@ class Area {
     name;
     
     constructor(id) {
-        this.id = area_ID;
+        this.id = id;
     }
 
     async getAreaName() {
