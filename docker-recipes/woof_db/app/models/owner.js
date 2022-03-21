@@ -55,6 +55,7 @@ class Owner {
             console.log(results);
             this.area = new Area(results[0].area_name);
             this.area = results[0].area_name;
+            console.log(results)
         }
     }
 /*

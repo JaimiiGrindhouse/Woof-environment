@@ -15,6 +15,7 @@ app.set('views', './app/views');
 const db = require('./services/db');
 
 const { Owner } = require('./models/owner');
+const { Area_Parks } = require("./models/area_parks");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -92,6 +93,20 @@ app.get("/single-owner/:id", async function (req, res) {
 
     console.log(owner);
     res.render('owner', {owner:owner});
+});
+
+ // TEST OF THE PARK FUNCTION (WORKS KIND OF)
+ app.get("/parks/:id", async function (req, res) {
+    var parkId = req.params.id;
+    // Create a student class with the ID passed
+    var parks = new Area_Parks(parkId);
+    await parks.getParkName();
+    await parks.getAreaID();
+    await parks.getAreaName();
+
+
+    console.log(parks);
+    res.render('parks', {parks:parks});
 });
 
 // Start server on port 3000
