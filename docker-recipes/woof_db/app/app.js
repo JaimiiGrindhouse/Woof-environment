@@ -4,6 +4,7 @@ const express = require("express");
 // Create express app
 var app = express();
 
+
 // Add static files location
 app.use(express.static("static"));
 
@@ -11,11 +12,15 @@ app.use(express.static("static"));
 app.set('view engine', 'pug');
 app.set('views', './app/views');
 
+
+
+
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
 const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
+const { Dog } = require("./models/dog");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -85,15 +90,39 @@ app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
     // Create a student class with the ID passed
     var owner = new Owner(ownerId);
+    
+    // Create a Dog class with the ID as an argument 
+
+    //The function will wait for this functions to take the information through SQL queries
     await owner.getOwnerName();
     await owner.getOwnerEmail();
     await owner.getOwnerPhone();
     await owner.getOwnerArea();
 
+    
 
-    console.log(owner);
     res.render('owner', {owner:owner});
+    
 });
+
+app.get("/dog-owner/:id", async function (req, res) {
+    var ownerId = req.params.id;
+
+    var dog = new Dog(ownerId);
+
+    await dog.getDogName();
+    await dog.getDogAge();
+    await dog.getDogSize();
+    await dog.getDogBreed();
+
+    console.log(dog);
+    console.log('THE AGE OF THE DOG IS: ' + dog.age);
+
+    res.render('dog', {dog:dog});
+
+});
+
+
 
  // TEST OF THE PARK FUNCTION (WORKS KIND OF)
  app.get("/parks/:id", async function (req, res) {
@@ -105,7 +134,7 @@ app.get("/single-owner/:id", async function (req, res) {
     await parks.getAreaName();
 
 
-    console.log(parks);
+    //console.log(parks);
     res.render('parks', {parks:parks});
 });
 

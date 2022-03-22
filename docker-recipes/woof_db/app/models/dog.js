@@ -21,7 +21,7 @@ class Dog {
         if (typeof this.name !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'
         const result = await db.query(sql, [this.id]);
-        this.name = results[0].dog_name;
+        this.name = result[0].dog_name;
         }
     }
 
@@ -29,7 +29,7 @@ class Dog {
         if (typeof this.age !== 'number') {
         var sql = 'SELECT * from dogs where person_ID = ?'
         const result = await db.query(sql, [this.id]);
-        this.age = results[0].dog_age;
+        this.age = result[0].dog_age;
         }
     }
 
@@ -37,7 +37,7 @@ class Dog {
         if (typeof this.size !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'
         const result = await db.query(sql, [this.id]);
-        this.size = results[0].dog_size;
+        this.size = result[0].dog_size;
         }
     }
 
@@ -45,13 +45,14 @@ class Dog {
         if (typeof this.breed !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'
         const result = await db.query(sql, [this.id]);
-        this.breed = results[0].dog_breed;
+        this.breed = result[0].dog_breed;
         }
     }
 
-    async getPicture() {
+    //FUTURE IMPLEMENTATION 
+    /*async getPicture() {
 
-    }
+    }*/
 
 }
 
