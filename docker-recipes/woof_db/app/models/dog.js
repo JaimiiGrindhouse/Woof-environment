@@ -1,6 +1,7 @@
 const db = require('./../services/db');
 const { Owner } = require('./owner');
 
+// Defines the Dog class
 class Dog {
     // Dog name
     name;
@@ -17,6 +18,7 @@ class Dog {
         this.id = id;
     }
 
+    // Pulls dog name from db
     async getDogName() {
         if (typeof this.name !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'
@@ -25,6 +27,7 @@ class Dog {
         }
     }
 
+    // Pulls dog age from db
     async getDogAge() {
         if (typeof this.age !== 'number') {
         var sql = 'SELECT * from dogs where person_ID = ?'
@@ -33,6 +36,7 @@ class Dog {
         }
     }
 
+    // Pulls dog size from db
     async getDogSize() {
         if (typeof this.size !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'
@@ -41,6 +45,7 @@ class Dog {
         }
     }
 
+    // Pulls dog breed from db
     async getDogBreed() {
         if (typeof this.breed !== 'string') {
         var sql = 'SELECT * from dogs where person_ID = ?'

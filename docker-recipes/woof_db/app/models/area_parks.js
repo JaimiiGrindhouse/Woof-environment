@@ -2,6 +2,7 @@ const db = require('./../services/db');
 
 const { area, Area } = require('./area')
 
+// Defines the Area_Parks class
 class Area_Parks {
     //park ID
     id;
@@ -16,6 +17,7 @@ class Area_Parks {
         this.id = id;
     }
 
+    // Pulls park name from db
     async getParkName() {
         if (typeof this.name !== 'string') {
             var sql = "SELECT * from area_parks where park_ID = ?"
@@ -24,7 +26,7 @@ class Area_Parks {
         }
     }
 
-    // Not sure if this sql query is correct. 
+    // Pulls area ID from db
     async getAreaID() {
         if (typeof this.area_ID !== Area) {
             var sql = "SELECT * from areas, area_parks \
@@ -34,6 +36,7 @@ class Area_Parks {
         }
     }
 
+    // Pulls area name from db
     async getAreaName() {
         if (typeof this.area_name !== 'string') {
             var sql = "SELECT * from area_parks where park_ID = ?"

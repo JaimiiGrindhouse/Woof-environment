@@ -1,5 +1,6 @@
 const db = require('./../services/db');
 
+// Defines the Area class
 class Area {
     // Area ID
     id;
@@ -10,6 +11,7 @@ class Area {
         this.id = id;
     }
 
+    // Pulls area name from db
     async getAreaName() {
         if (typeof this.name !== 'string');
         var sql = 'SELECT * from areas where area_ID = ?'

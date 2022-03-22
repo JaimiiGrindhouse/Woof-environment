@@ -18,6 +18,7 @@ app.set('views', './app/views');
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
+// Import models from models folder
 const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
@@ -85,7 +86,7 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
 }); 
 */
 
- // this part is not working yet
+ // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
     // Create a student class with the ID passed
@@ -124,7 +125,7 @@ app.get("/dog-owner/:id", async function (req, res) {
 
 
 
- // TEST OF THE PARK FUNCTION (WORKS KIND OF)
+ // function to test parks model
  app.get("/parks/:id", async function (req, res) {
     var parkId = req.params.id;
     // Create a student class with the ID passed

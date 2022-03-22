@@ -3,6 +3,7 @@ const db = require('./../services/db');
 const { Dog } = require('./dog');
 const { Area } = require('./area');
 
+// Defines the Owner class
 class Owner {
     // Owner ID
     id;
@@ -21,6 +22,7 @@ class Owner {
         this.id = id;
     }
 
+    // Pulls owner name from db
     async getOwnerName() {
         if (typeof this.name !== 'string') {
             var sql = "SELECT * from owners where person_ID = ?"
@@ -29,6 +31,7 @@ class Owner {
         }
     }
 
+    // Pulls owner email address from db
     async getOwnerEmail() {
         if (typeof this.email !== 'string') {
             var sql = "SELECT * from owners where person_ID = ?"
@@ -37,6 +40,7 @@ class Owner {
         }
     }
 
+    // Pulls owner phone number from db
     async getOwnerPhone() {
         if (typeof this.phone !== 'string') {
             var sql = "SELECT * from owners where person_ID = ?"
@@ -45,7 +49,7 @@ class Owner {
         }
     }
 
-    // This might not work lol. 
+    // Pulls owner area from db
     async getOwnerArea() {
         if (typeof this.area !== Area) {
             var sql = "SELECT * from areas a \
@@ -58,7 +62,7 @@ class Owner {
             console.log(results)
         }
     }
-/*
+    /*
     // LEAVING THIS FUNCTION EMPTY FOR NOW.
     async getOwnerPicture() {
 
