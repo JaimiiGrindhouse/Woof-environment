@@ -61,3 +61,8 @@ Once in the database container, you can get a MySQL CLI in the usual way
 ```bash
 mysql -uroot -p<password> 
 ```
+All this inside of the woof_db folder
+-npm install jquery
+npm install bootstrap
+npm install popper
+docker-compose up --build
