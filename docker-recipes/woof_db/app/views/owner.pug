@@ -13,14 +13,14 @@ head
     title Woof : #{owner.name}
     //FAVICON
     link(rel='icon' href='STYLE/LOGO.svg')
-    
+
 
 body(class='container')
     //NAVBAR
     nav(class='navbar fixed-top')
         div(class='row')
             div(clas='col')
-                img(src='https://assets-global.website-files.com/5e3177cecf36f6591e4e38cb/5ea2a86505e63bdd814cf868_Logo.png' style='width:100px; height:100px;')
+                img(src='/images/woof_logo.png' style='width:100px; height:100px;')
                     
                     
     //APP BODY
@@ -39,7 +39,7 @@ body(class='container')
                                             div(class='row offset-1 offset-sm-2')
                                                 b #{owner.name}
                                             div(class='row offset-1 offset-sm-2')
-                                                img(src='https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' class='img-fluid profile-pic')
+                                                img(src='/images/owners/' + owner.id + '.jpg' class='img-fluid profile-pic')
                                                 //implementation of img for user profile 
                                     div(class='col')
                                         div(class='row')
@@ -57,7 +57,7 @@ body(class='container')
                                             div(class='row offset-1 offset-sm-2')
                                                 b #{dog.name}
                                             div(class='row offset-1 offset-sm-2')
-                                                img(src='https://st2.depositphotos.com/1009634/7235/v/950/depositphotos_72350117-stock-illustration-no-user-profile-picture-hand.jpg' class='img-fluid profile-pic')
+                                                img(src='/images/dogs/' + owner.id + '.jpg' class='img-fluid profile-pic')
                                                 //implementation of img for user profile 
                                     div(class='col')
                                         div(class='row')
