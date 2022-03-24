@@ -12,9 +12,6 @@ app.use(express.static("static"));
 app.set('view engine', 'pug');
 app.set('views', './app/views');
 
-
-
-
 // Get the functions in the db.js file to use
 const db = require('./services/db');
 
@@ -91,7 +88,7 @@ app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
     // Create a student class with the ID passed
     var owner = new Owner(ownerId);
-    
+    var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
 
     //The function will wait for this functions to take the information through SQL queries
@@ -99,11 +96,15 @@ app.get("/single-owner/:id", async function (req, res) {
     await owner.getOwnerEmail();
     await owner.getOwnerPhone();
     await owner.getOwnerArea();
+    await dog.getDogName();
+    await dog.getDogAge();
+    await dog.getDogSize();
+    await dog.getDogBreed();
 
     
 
-    res.render('owner', {owner:owner});
-    
+    res.render('owner', {owner:owner, dog:dog});
+   
 });
 
 app.get("/dog-owner/:id", async function (req, res) {

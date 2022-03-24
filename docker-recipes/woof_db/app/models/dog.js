@@ -1,5 +1,7 @@
 const db = require('./../services/db');
-const { Owner } = require('./owner');
+//const { Owner } = require('./owner');
+//const { Dog } = require('./dog');
+//const { Area } = require('./area');
 
 // Defines the Dog class
 class Dog {

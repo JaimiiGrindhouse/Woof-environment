@@ -16,7 +16,7 @@ class Area {
         if (typeof this.name !== 'string');
         var sql = 'SELECT * from areas where area_ID = ?'
         const result = await db.query(sql, [this.id]);
-        this.name = results[0].name;
+        this.name = result[0].name;
         }
     
 }
