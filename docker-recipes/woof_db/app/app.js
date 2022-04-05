@@ -86,12 +86,12 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
  // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
-    // Create a student class with the ID passed
+    // Create an owner class with the ID passed
     var owner = new Owner(ownerId);
     var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
 
-    //The function will wait for this functions to take the information through SQL queries
+    //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
     await owner.getOwnerEmail();
     await owner.getOwnerPhone();
@@ -129,7 +129,7 @@ app.get("/dog-owner/:id", async function (req, res) {
  // function to test parks model
  app.get("/parks/:id", async function (req, res) {
     var parkId = req.params.id;
-    // Create a student class with the ID passed
+    // Create a park class with the ID passed
     var parks = new Area_Parks(parkId);
     await parks.getParkName();
     await parks.getAreaID();
