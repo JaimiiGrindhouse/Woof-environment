@@ -65,4 +65,6 @@ All this inside of the woof_db folder
 -npm install jquery
 npm install bootstrap
 npm install popper
+npm install bcryptjs
+npm install express-session
 docker-compose up --build
