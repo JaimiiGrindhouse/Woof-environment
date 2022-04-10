@@ -4,9 +4,20 @@ const express = require("express");
 // Create express app
 var app = express();
 
+// Set the sessions
+var session = require('express-session');
+app.use(session({
+  secret: 'secretkeysdfjsflyoifasd',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // Add static files location
 app.use(express.static("static"));
+
+// Make sure we get the POST parameters
+app.use(express.urlencoded({ extended: true }));
 
 // Use the Pug templating engine
 app.set('view engine', 'pug');
@@ -19,6 +30,7 @@ const db = require('./services/db');
 const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
+const { User } = require("./models/user");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -86,12 +98,12 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
  // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
-    // Create a student class with the ID passed
+    // Create an owner class with the ID passed
     var owner = new Owner(ownerId);
     var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
 
-    //The function will wait for this functions to take the information through SQL queries
+    //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
     await owner.getOwnerEmail();
     await owner.getOwnerPhone();
@@ -129,7 +141,7 @@ app.get("/dog-owner/:id", async function (req, res) {
  // function to test parks model
  app.get("/parks/:id", async function (req, res) {
     var parkId = req.params.id;
-    // Create a student class with the ID passed
+    // Create a park class with the ID passed
     var parks = new Area_Parks(parkId);
     await parks.getParkName();
     await parks.getAreaID();
@@ -138,6 +150,65 @@ app.get("/dog-owner/:id", async function (req, res) {
 
     //console.log(parks);
     res.render('parks', {parks:parks});
+});
+
+// Register
+app.get('/register', function (req, res) {
+    res.render('register');
+});
+app.post('/set-password', async function (req, res) {
+    params = req.body;
+    var user = new User(params.email);
+    try {
+        uId = await user.getIdFromEmail();
+        if (uId) {
+            // If a valid, existing user is found, set the password and redirect to the users single-owner page
+            await user.setUserPassword(params.password);
+            res.redirect('/single-owner/' + uId);
+        }
+        else {
+            // If no existing user is found, add a new one
+            newId = await user.addUser(params.email);
+            res.send('Perhaps a page where a new user sets a programme would be good here');
+        }
+    } catch (err) {
+        console.error(`Error while adding password `, err.message);
+    }
+});
+
+// Login
+app.get('/login', function (req, res) {
+    res.render('login');
+});
+
+// Check submitted email and password pair
+app.post('/authenticate', async function (req, res) {
+    params = req.body;
+    var user = new User(params.email);
+    try {
+        uId = await user.getIdFromEmail();
+        if (uId) {
+            match = await user.authenticate(params.password);
+            if (match) {
+                res.redirect('/single-owner/' + uId);
+            }
+            else {
+                // TODO improve the user journey here
+                res.send('invalid password');
+            }
+        }
+        else {
+            res.send('invalid email');
+        }
+    } catch (err) {
+        console.error(`Error while comparing `, err.message);
+    }
+});
+
+// Logout
+app.get('/logout', function (req, res) {
+    req.session.destroy();
+    res.redirect('/login');
 });
 
 // Start server on port 3000
