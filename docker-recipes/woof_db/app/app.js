@@ -82,19 +82,6 @@ app.get("/all-owners-formatted", function(req, res) {
     });
 });
 
-/*// this part is not working yet
-app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id and not person_ID. I checked it in the console. 
-    var ownerId = req.params.id; // it has to be .id and not person_ID. 
-    var ownerSql = 'SELECT * from owners where person_ID = ?'
-    db.query(ownerSql, [ownerId]).then(results => {
-        console.log(results);
-        res.send(results);
-    });
-
-
-}); 
-*/
-
  // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
