@@ -22,6 +22,7 @@ class Owner {
         this.id = id;
     }
 
+       
     // Pulls owner name from db
     async getOwnerName() {
         if (typeof this.name !== 'string') {
@@ -71,6 +72,8 @@ class Owner {
 }
 
 
+
 module.exports = {
-    Owner
+    Owner,
+    
 }

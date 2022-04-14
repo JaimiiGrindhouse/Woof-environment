@@ -11,6 +11,10 @@ class Area {
         this.id = id;
     }
 
+     // Set owner's area method
+     setOwnerArea(area) {
+        this.area = area;
+    }
     // Pulls area name from db
     async getAreaName() {
         if (typeof this.name !== 'string');
@@ -20,7 +24,24 @@ class Area {
         }
     
 }
+// Gets list of all areas
+async function getAllAreas() {
+    var sql = "SELECT area_ID, area_name from Areas"
+    const results = await db.query(sql);
+    var areas = [];
+    for (var row of results) {
+        // Use our Area class to neatly format the object going to the template
+        var area = new Area (row.area_ID);
+        // Set the area name
+        area.setOwnerArea(row.area_name);
+        // Push the area class onto area array
+        areas.push(area);
+    }    
+    // Return the array of all areas
+    return areas;
+}
 
 module.exports = {
-    Area
+    Area,
+    getAllAreas
 }
