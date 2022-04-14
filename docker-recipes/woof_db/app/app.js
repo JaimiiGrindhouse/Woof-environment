@@ -35,7 +35,13 @@ const getarea = require("./models/area");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
-    res.send("Oh hey there world");
+    console.log(req.session);
+    if (req.session.uid) {
+		res.send('Welcome back, ' + req.session.uid + '!');
+	} else {
+		res.send('Please login to view this page!');
+	}
+	res.end();
 });
 
 // handler 2 - all areas in a json format
