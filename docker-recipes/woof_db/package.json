@@ -18,7 +18,7 @@
     "jade-bootstrap": "^1.0.14",
     "jquery": "^3.6.0",
     "mysql": "^2.18.1",
-    "mysql2": "^2.3.0",
+    "mysql2": "^2.3.3",
     "node-static": "^0.7.11",
     "nodenpm": "^0.1.6",
     "popper": "^1.0.1",

@@ -43,7 +43,7 @@ class User {
         const pw = await bcrypt.hash(password, 10);
         var sql = "INSERT INTO Users (email, password) VALUES (? , ?)";
         const result = await db.query(sql, [this.email, pw]);
-        console.log(result.insertId);
+        //console.log(result.insertId);
         this.id = result.insertId;
         return true;
     }

@@ -80,7 +80,17 @@ body(class='container')
                                 h2(class='card-title') Go for a walk!
                             div(class='row offset-1 offset-sm-1')
                                 div(class='dropdown')
-                                    button(class='btn btn-primary dropdown-toggle' type='button') Choose your Area
+                                    button(class='btn btn-primary dropdown-toggle' type='button' id="AreaMenu" data-bs-toggle="dropdown" aria-expanded="false") Choose your Area
+                                    ul(class="dropdown-menu" aria-labelledby="AreaMenu")
+                                        li
+                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Putney"') Putney
+                                        li
+                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Wimbledon"') Wimbledon
+                                        li
+                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Clapham"') Clapham
+                                        li
+                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Fullham"') Fullham
+                                    
                                 div(class='row offset-1 offset-sm-1')
                                 div(class='dropdown')
                                     button(class='btn btn-primary dropdown-toggle' type='button') Choose your Park

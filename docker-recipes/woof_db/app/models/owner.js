@@ -56,10 +56,10 @@ class Owner {
             JOIN owners o ON a.area_ID = o.area_ID \
             where person_ID = ?"
             const results = await db.query(sql, [this.id]);
-            console.log(results);
+            //console.log(results);
             this.area = new Area(results[0].area_name);
             this.area = results[0].area_name;
-            console.log(results)
+            //console.log(results)
         }
     }
     /*

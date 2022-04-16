@@ -19,6 +19,7 @@ class Area {
         this.name = result[0].name;
         }
     
+  
 }
 
 module.exports = {

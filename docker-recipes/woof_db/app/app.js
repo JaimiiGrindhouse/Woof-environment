@@ -41,7 +41,7 @@ app.get("/", function(req, res) {
 app.get("/all-areas", function(req, res) {
     sql = 'select * from areas';
     db.query(sql).then(results => {
-        console.log(results);
+        //console.log(results);
         res.send(results);
     });
 });
@@ -58,7 +58,7 @@ app.get("/all-areas-formatted", function(req, res) {
             output += '</tr>'
         }
         output += '</table>';
-        console.log(output);
+        //console.log(output);
         res.send(output);
     });
 });
@@ -77,7 +77,7 @@ app.get("/all-owners-formatted", function(req, res) {
             output += '</tr>'
         }
         output += '</table>';
-        console.log(output);
+        //console.log(output);
         res.send(output);
     });
 });
@@ -97,11 +97,15 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
 
  // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
+
+    
+    
     var ownerId = req.params.id;
     // Create an owner class with the ID passed
     var owner = new Owner(ownerId);
-    var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
+    var dog = new Dog(ownerId);
+    
 
     //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
@@ -129,8 +133,8 @@ app.get("/dog-owner/:id", async function (req, res) {
     await dog.getDogSize();
     await dog.getDogBreed();
 
-    console.log(dog);
-    console.log('THE AGE OF THE DOG IS: ' + dog.age);
+    //console.log(dog);
+    //console.log('THE AGE OF THE DOG IS: ' + dog.age);
 
     res.render('dog', {dog:dog});
 
@@ -180,6 +184,11 @@ app.post('/set-password', async function (req, res) {
 app.get('/login', function (req, res) {
     res.render('login');
 });
+
+// Handling unexisting directions
+app.all('*', (req,res) => {
+    res.status(404).send('<h1>Page not found</h1>')
+})
 
 // Check submitted email and password pair
 app.post('/authenticate', async function (req, res) {
