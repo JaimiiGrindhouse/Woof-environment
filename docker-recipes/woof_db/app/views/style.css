@@ -1,0 +1,179 @@
+body {
+    background-image: url('/Users/jamessimmonds/Documents/Woof environment/docker-recipes/woof_db/static/images/woof_text_logo_stacked.png');
+    padding: 0;
+    margin: 0px;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  #main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .logoheader {
+    
+    display: flex;
+    justify-content: center;
+}
+  
+  form {
+    border-radius: 25px; 
+    background-color: #DC94FF;
+    width: 40%;
+    padding: 30px;
+    height: 60%;
+    box-shadow:
+    /*inset 0 0 25px #fff,      /* inner white */
+    /*inset -20px 0 40px #f0f,   /* inner left magenta short */
+    /*inset -20px 0 80px #0ff,  /* inner right cyan short */
+    /*inset -20px 0 300px #f0f,  /* inner left magenta broad */
+    /*inset -20px 0 300px #0ff, /* inner right cyan broad */
+    0 0 50px #fff,            /* outer white */
+    -10px 0 80px #f0f,        /* outer left magenta */
+    10px 0 80px #0ff;         /* outer right cyan */
+    
+  }
+
+  .logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+
+  }
+
+  input[type=submit]{
+    clear: both;
+    width: 100%;
+    
+    text-align:center;
+    background: #4C7FEB;
+    color: #fff;
+    text-transform: uppercase;
+    border: 1px solid #4C7FEB;
+    padding: 16px 40px;
+    margin: 0 auto;
+    -webkit-transition: color 0.2s,background-color 0.2s,box-shadow 0.2s,border 0.2s;
+    -moz-transition: color 0.2s,background-color 0.2s,box-shadow 0.2s,border 0.2s;
+    -o-transition: color 0.2s,background-color 0.2s,box-shadow 0.2s,border 0.2s;
+    transition: color 0.2s,background-color 0.2s,box-shadow 0.2s,border 0.2s;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 25px;
+    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    cursor: pointer;
+}
+input[type=submit]:hover{
+    background: #285AC5;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+  .center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 50%;
+  }
+
+  
+  .email input,
+  .password input {
+    border-radius: 25px;  
+    width: 100%;
+    height: 40px;
+    border: 0px;
+    margin: 5px 5px 15px;
+    box-sizing: border-box;
+    padding: 15px 15px;
+  }
+  
+  input:focus,
+  button:focus {
+    outline: none;
+  }
+  
+ /* button {
+    border-radius: 25px;  
+    background: #63cdda;
+    color: #fff;
+    border: 0px;
+    width: 100%;
+    padding: 10px;
+    margin: 5px;
+    font-size: 24px;
+    cursor: pointer;
+    
+  }
+
+  button:hover {
+    text-decoration: underline;
+    color: black
+  }*/
+  
+  /*h3 {
+    font-size: 24px;
+    text-align: center;
+    color: #fff;
+    text-transform: capitalize;
+    margin-bottom: 10px;
+  }*/
+  
+  p {
+    text-align: center;
+    color: #fff;
+    text-transform: capitalize;
+  }
+  
+
+  
+  .fa {
+    float: left;
+    font-size: 18px;
+  }
+  
+  a {
+    padding-left: 5px;
+    text-decoration: none;
+    color: #63cdda;
+    text-transform: capitalize;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: black
+  }
+  
+  .label {
+    font-size: 40px;
+    text-align: center;
+    color: #fff;
+    padding-bottom: 15px;
+    text-transform: capitalize;
+  }
+  
+  @media(max-width:610px) {
+    form {
+      width: 60%;
+    }
+  
+    button {
+      padding: 5px;
+    }
+  }
+  
+  @media(max-width:420px) {
+    form {
+      width: 70%;
+    }
+  
+    h3 {
+      margin: 10px;
+    }
+  }
