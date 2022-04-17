@@ -96,7 +96,7 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
 }); 
 */
 
- // function to test owner model
+ // Single owner page
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
     // Create an owner class with the ID passed
@@ -171,7 +171,7 @@ app.post('/set-password', async function (req, res) {
             // If no existing user is found, add a new one
             newId = await user.addUser(params.email);
             uId = await user.getIdFromEmail();
-            res.redirect("/set-profile/" + uId);
+            res.redirect("/set-profile/" + uId);            
             //res.send('set a profile'+uId)
         }
     } catch (err) {
