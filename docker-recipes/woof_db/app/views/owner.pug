@@ -82,21 +82,17 @@ body(class='container')
                                 div(class='dropdown')
                                     button(class='btn btn-primary dropdown-toggle' type='button' id="AreaMenu" data-bs-toggle="dropdown" aria-expanded="false") Choose your Area
                                     ul(class="dropdown-menu" aria-labelledby="AreaMenu")
-                                        li
-                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Putney"') Putney
-                                        li
-                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Wimbledon"') Wimbledon
-                                        li
-                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Clapham"') Clapham
-                                        li
-                                            a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML = "Fullham"') Fullham
-                                    
+                                        for item in dbAreas 
+                                            li
+                                                a(class="dropdown-item" href="#" onclick='getElementById("AreaMenu").innerHTML =' + '"' + item + '"') #{item}
                                     //This is a change
                                 div(class='row offset-1 offset-sm-1')
                                 div(class='dropdown')
                                     button(class='btn btn-primary dropdown-toggle' type='button') Choose your Park
                                 div(class='row offset-3 button')
                                     img(src='/images/BUTTON.svg' )
+
+                                    
 
     
     

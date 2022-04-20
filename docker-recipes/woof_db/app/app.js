@@ -32,6 +32,8 @@ const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
 const { User } = require("./models/user");
 
+const getarea = require("./models/area");
+
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
     res.send("Oh hey there world");
@@ -105,6 +107,8 @@ app.get("/single-owner/:id", async function (req, res) {
     var owner = new Owner(ownerId);
     // Create a Dog class with the ID as an argument 
     var dog = new Dog(ownerId);
+    //Get All Areas available for search 
+    var areas = await getarea.getAllAreas();
     
 
     //The function will wait for these functions to take the information through SQL queries
@@ -118,8 +122,9 @@ app.get("/single-owner/:id", async function (req, res) {
     await dog.getDogBreed();
 
     
+    
 
-    res.render('owner', {owner:owner, dog:dog});
+    res.render('owner', {owner:owner, dog:dog, dbAreas:areas});
    
 });
 
