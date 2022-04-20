@@ -31,6 +31,7 @@ const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
 const { User } = require("./models/user");
+const getarea = require("./models/area");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -95,7 +96,7 @@ app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id
 }); 
 */
 
- // function to test owner model
+ // Single owner page
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
     // Create an owner class with the ID passed
@@ -169,17 +170,36 @@ app.post('/set-password', async function (req, res) {
         else {
             // If no existing user is found, add a new one
             newId = await user.addUser(params.email);
-            res.send('Perhaps a page where a new user sets a programme would be good here');
+            uId = await user.getIdFromEmail();
+            res.redirect("/set-profile/" + uId);            
+            //res.send('set a profile'+uId)
         }
     } catch (err) {
         console.error(`Error while adding password `, err.message);
     }
 });
 
+// Create a set-profile route  - /set-profile
+app.get("/set-profile/:id", async function(req, res) {
+    var userId = req.params.id;
+    var user = new User(userId);
+    var areas = await getarea.getAllAreas();
+    //res.send('set a profile');
+    res.render('profile', {areas:areas, user:user});
+});
+
 // Login
 app.get('/login', function (req, res) {
     res.render('login');
 });
+
+// Create a post route to handle the form submission of the option list
+app.post('/area-select', function (req, res) {
+    // Retrieve the parameter and redirect to the single student page
+    id = req.body.studentParam;
+    res.redirect('/single-owner/' + id);
+});
+
 
 // Check submitted email and password pair
 app.post('/authenticate', async function (req, res) {
