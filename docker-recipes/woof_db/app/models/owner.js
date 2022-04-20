@@ -13,6 +13,8 @@ class Owner {
     email;
     // Owner phone number
     phone;
+    // Owner area ID
+    area_id;
     // Owner area
     area;
     // Owner picture
@@ -49,6 +51,16 @@ class Owner {
         }
     }
 
+    async getOwnerAreaID() {
+        if (typeof this.area !== Area) {
+            var sql = "SELECT * from owners where person_ID - ?"
+            const results = await db.query(sql, [this.id]);
+            console.log(results);
+            this.area_id = results[0].area_ID;
+            console.log(results)
+        }
+    }
+
     // Pulls owner area from db
     async getOwnerArea() {
         if (typeof this.area !== Area) {
@@ -68,9 +80,45 @@ class Owner {
 
     }
     */
+
+    setOwnerName(name) {
+        this.name = name;
+    }
+
+    setOwnerAreaID(area_id) {
+        this.area_id = area_id;
+    }
+
+    setOwnerArea(area) {
+        this.area - area;
+    }
+
+    setOwnerEmail(email) {
+        this.email = email;
+    }
+
+    setOwnerPhone(phone) {
+        this.phone = phone;
+    }
 }
 
+async function getAllOwners() {
+    var sql = "SELECT * from owners"
+    const results = await db.query(sql);
+    var owners = [];
+    for (var row of results) {
+        var owner = new Owner(row.person_ID);
+        owner.setOwnerName(row.person_name);
+        owner.setOwnerAreaID(row.area_ID);
+        owner.setOwnerArea(row.area_name);
+        owner.setOwnerEmail(row.email);
+        owner.setOwnerPhone(row.phone_no);
+        owners.push(owner);
+    }
+    return owners;
+
+}
 
 module.exports = {
-    Owner
+    Owner, getAllOwners
 }

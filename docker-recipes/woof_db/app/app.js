@@ -31,6 +31,7 @@ const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
 const { User } = require("./models/user");
+const get_owners = require("./models/owner")
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -136,7 +137,31 @@ app.get("/dog-owner/:id", async function (req, res) {
 
 });
 
+// Work in progress, need to iterate through nested arrays.
+app.get("/matches/:id", async function(req, res){
+    var ownerId = req.params.id;
+    // Create an owner class with the ID passed
+    var owner = new Owner(ownerId);
 
+    await owner.getOwnerName();
+    await owner.getOwnerEmail();
+    await owner.getOwnerPhone();
+    var owner_area_id = await owner.getOwnerAreaID();
+    var owners = await get_owners.getAllOwners();
+    var matches = [];
+    /*for (var i = 0; i < owners.length; i++) {
+        const owner = owners[i];
+        for (let area_id of Object.keys(owner)) {
+            if (owner_area_id == area_id) {                
+                matches.push(owner);
+                return matches;    
+                    }
+                }
+            }*/  
+    console.log(owners)
+    console.table(owners)
+    res.send(owners)
+});
 
  // function to test parks model
  app.get("/parks/:id", async function (req, res) {
