@@ -12,10 +12,11 @@ class Area_Parks {
     area_ID;
     //area name
     area_name;
-
     constructor(id) {
         this.id = id;
     }
+
+    
 
     // Pulls park name from db
     async getParkName() {
@@ -46,6 +47,24 @@ class Area_Parks {
     }
 
 }
+
+//New function implementation
+
+async function getAllParks(){
+    var sql = 'SELECT area_name, park_name FROM area_parks;'
+    const results = await db.query(sql);
+    return JSON.stringify(results)
+}
+
+
+
+
+
+
+
+
 module.exports = {
-    Area_Parks
+    Area_Parks,
+    getAllParks
+
 }

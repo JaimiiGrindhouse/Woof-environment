@@ -34,7 +34,7 @@ async function getAllAreas() {
         // Set the area name
         area.setOwnerArea(row.area_name);
         // Push the area class onto area array
-        areas.push(area['area']);
+        areas.push(area);
     }    
     // Return the array of all areas
     return areas;
@@ -42,6 +42,7 @@ async function getAllAreas() {
 }
 
 getAllAreas()
+
 
 
 module.exports = {
