@@ -24,6 +24,7 @@ class Owner {
         this.id = id;
     }
 
+       
     // Pulls owner name from db
     async getOwnerName() {
         if (typeof this.name !== 'string') {
@@ -119,6 +120,12 @@ async function getAllOwners() {
 
 }
 
+
 module.exports = {
+<<<<<<< HEAD
     Owner, getAllOwners
+=======
+    Owner,
+    
+>>>>>>> master
 }
