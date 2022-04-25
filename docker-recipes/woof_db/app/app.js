@@ -35,7 +35,6 @@ const { User } = require("./models/user");
 const get_owners = require("./models/owner")
 =======
 const getarea = require("./models/area");
->>>>>>> master
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
