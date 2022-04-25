@@ -110,7 +110,7 @@ async function getAllOwners() {
         var owner = new Owner(row.person_ID);
         owner.setOwnerName(row.person_name);
         owner.setOwnerAreaID(row.area_ID);
-        owner.setOwnerArea(row.area_name);
+        //owner.setOwnerArea(row.area_name);
         owner.setOwnerEmail(row.email);
         owner.setOwnerPhone(row.phone_no);
         owners.push(owner);

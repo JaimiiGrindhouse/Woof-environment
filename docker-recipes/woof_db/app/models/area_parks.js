@@ -45,7 +45,30 @@ class Area_Parks {
         }
     }
 
+    setParkName(name) {
+        this.name = name;
+    }
+
+    setParkID(id) {
+        this.id = id;
+    }
+
 }
+
+async function getAllParks() {
+    var sql = "SELECT * from area_parks"
+    const results = await db.query(sql);
+    var parks = [];
+    for (var row of results) {
+        var park = new Area_Parks(row.park_ID);
+        park.setParkName(row.park_name);
+        parks.push(park);
+    }
+    return parks;
+
+}
+
+
 module.exports = {
-    Area_Parks
+    Area_Parks, getAllParks
 }

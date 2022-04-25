@@ -31,10 +31,9 @@ const { Owner } = require('./models/owner');
 const { Area_Parks } = require("./models/area_parks");
 const { Dog } = require("./models/dog");
 const { User } = require("./models/user");
-<<<<<<< HEAD
-const get_owners = require("./models/owner")
-=======
+const get_owners = require("./models/owner");
 const getarea = require("./models/area");
+const get_parks = require("./models/area_parks");
 
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
@@ -161,9 +160,15 @@ app.get("/matches/:id", async function(req, res){
                     }
                 }
             }*/  
-    console.log(owners)
-    console.table(owners)
-    res.send(owners)
+    console.log(owners);
+    console.table(owners);
+    res.send(owners);
+});
+
+app.get("/park_test", async function(req, res){
+    var all_parks = await get_parks.getAllParks();
+
+    res.send(all_parks);
 });
 
  // function to test parks model
