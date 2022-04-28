@@ -38,6 +38,8 @@ const getParks = require("./models/area_parks")
 
 
 
+
+
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
     res.send("Oh hey there world");
@@ -116,6 +118,10 @@ app.get("/single-owner/:id", async function (req, res) {
 
     var areas = await getarea.getAllAreas(ownerId);
     var allParks = await getParks.getAllParks();
+
+    
+    
+ 
     
     
 
@@ -129,10 +135,9 @@ app.get("/single-owner/:id", async function (req, res) {
     await dog.getDogSize();
     await dog.getDogBreed();
 
-    console.log(allParks[0])
-
+   
     //handling function for the front end
-    res.render('owner', {owner:owner, dog:dog, dbAreas:areas, allParks:allParks});
+    res.render('owner', {owner:owner, dog:dog, dbAreas:areas,allParks:allParks});
    
 });
 
