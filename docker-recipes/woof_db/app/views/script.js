@@ -27,7 +27,7 @@ function filterParks(parkObject){
 
 function createDropdown(message){
     console.log(message)
-    let dropdown = '<select id="ParkSelection" class="form-control field_choice">'
+    let dropdown = '<select id="ParkSelection" class="form-control field_choice"> Choose your park'
    
     for(let i=0; i<filtered.length; i++){
         dropdown += '<option value="'+ filtered[i] + '">'+ filtered[i] + '</option>'
@@ -36,6 +36,7 @@ function createDropdown(message){
     document.getElementById("test").innerHTML = dropdown;
     $(document).ready(function(){
         $(".field_choice").on("change",function(){
+            park = $(this).val();
             console.log($(this).val());
         });
     });
@@ -43,8 +44,24 @@ function createDropdown(message){
 }
 
 
-function parkselected(selection){
-    console.log("You've selected " + selection)
+function parkSelected(ownerID, dogSize){
+
+    //console.log("You've selected: " + park)
+    //console.log("Your ID is: " + ownerID)
+    //console.log("Your dog size is: " + dogSize)
+
+    const matchingData = {park, ownerID, dogSize};
+
+    const options ={
+        method:'POST',
+        headers: {
+            'Content-Type':'application/json'
+        },
+        body: JSON.stringify(matchingData)
+    }
+    
+
+    fetch('/matches', options)
 }
 
 

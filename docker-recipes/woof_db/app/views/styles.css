@@ -35,6 +35,12 @@
     width: 85%
 }
 
+.form-control{
+    width: 90%;
+    background-color: #0d6efd;
+    background: white;
+}
+
 .button{
 
     margin-top: 20%;

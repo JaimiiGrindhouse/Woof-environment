@@ -90,12 +90,12 @@ body(class='container')
                                                 a(class="dropdown-item" href="#" onclick='areaClick("'+ item.area + '")') #{item.area}
                                 div(class='row offset-1 offset-sm-1')
                                 div(class='dropdown')
-                                    button(class='btn btn-primary dropdown-toggle' type='button' id="ParkMenu" ) Choose your Park
+                                    button(class='btn btn-primary dropdown-toggle' type='button' id="ParkMenu" onclick='filterParks(' + allParks + ')') Choose your Park
                                     p(id='test')
-                                   
-                                        
                                 div(class='row offset-3 button')
-                                    img(src='/images/BUTTON.svg' type='button' onclick='filterParks(' + allParks + ')') 
+                                    img(src='/images/BUTTON.svg' type='button' onclick='parkSelected("' + owner.id + '","' + dog.size +'")') 
+                                    //We are sendinf the form through the script.js file 
+
                                     
                                   
                                     

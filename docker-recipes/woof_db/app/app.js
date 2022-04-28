@@ -15,6 +15,7 @@ app.use(session({
 
 // Add static files location
 app.use(express.static("static"));
+app.use(express.json());
 
 // Make sure we get the POST parameters
 app.use(express.urlencoded({ extended: true }));
@@ -120,11 +121,6 @@ app.get("/single-owner/:id", async function (req, res) {
     var allParks = await getParks.getAllParks();
 
     
-    
- 
-    
-    
-
     //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
     await owner.getOwnerEmail();
@@ -158,7 +154,9 @@ app.get("/dog-owner/:id", async function (req, res) {
 
 });
 
-
+app.post("/matches" , (req,res) => {
+    console.log(req.body)
+});
 
  // function to test parks model
  app.get("/parks/:id", async function (req, res) {
