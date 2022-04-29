@@ -80,35 +80,23 @@ class Owner {
     }
 
     // Add Owner Details to Profile
-    async addOwnerDetails(name, email, phone) {
-        var sql = "INSERT INTO Owners (person_name, area_id, email, phone_no, person_id) VALUES (?, '4', ?, ?, ?)";
-        const result = await db.query(sql, [name, email, phone, this.id]);
+    async addOwnerDetails(name, email, phone, area) {
+        var sql = "INSERT INTO Owners (person_name, area_id, email, phone_no, person_id) VALUES (?, ?, ?, ?, ?)";
+        const result = await db.query(sql, [name, area, email, phone, this.id]);
         // Ensure the Owner properties in the model is up to date
         this.id = result.insertId;
-        console.log(result)
         return result;
     }
     
     // Add Dog Details to Profile
-    async addDogDetails(dogName, dogage, dogsize, dogbreed) {
-        var sql = "INSERT INTO Owners (person_name, area_id, email, phone_no, person_id) VALUES (?, '4', ?, ?, ?)";
-        const result = await db.query(sql, [name, email, phone, this.id]);
-        // Ensure the Owner properties in the model is up to date
+    async addDogDetails(dogname, dogbreed, dogsize, dogage) {
+        var sql = "INSERT INTO dogs (dog_name, dog_breed, dog_size, dog_age, person_id) VALUES (?, ?, ?, ?, ?)";
+        const result = await db.query(sql, [dogname, dogbreed, dogsize, dogage, this.id]);
+        // Ensure the Dog properties in the model is up to date
         this.id = result.insertId;
-        console.log(result)
         return result;
     }
-
 }
-    /*
-    // LEAVING THIS FUNCTION EMPTY FOR NOW.
-    async getOwnerPicture() {
-
-    }
-    */
-    
-
-
 
 module.exports = {
     Owner

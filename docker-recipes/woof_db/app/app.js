@@ -83,19 +83,6 @@ app.get("/all-owners-formatted", function(req, res) {
     });
 });
 
-/*// this part is not working yet
-app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id and not person_ID. I checked it in the console. 
-    var ownerId = req.params.id; // it has to be .id and not person_ID. 
-    var ownerSql = 'SELECT * from owners where person_ID = ?'
-    db.query(ownerSql, [ownerId]).then(results => {
-        console.log(results);
-        res.send(results);
-    });
-
-
-}); 
-*/
-
  // Single owner page
 app.get("/single-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
@@ -103,10 +90,7 @@ app.get("/single-owner/:id", async function (req, res) {
     var owner = new Owner(ownerId);
     var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
-    console.log(ownerId);
-    console.log(owner);
-    console.log(dog);
-
+    console.log('single owner', ownerId);
 
     //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
@@ -118,15 +102,11 @@ app.get("/single-owner/:id", async function (req, res) {
     await dog.getDogSize();
     await dog.getDogBreed();
 
-    
-
-    res.render('owner', {owner:owner, dog:dog});
-   
+    res.render('owner', {owner:owner, dog:dog});   
 });
 
 app.get("/dog-owner/:id", async function (req, res) {
     var ownerId = req.params.id;
-
     var dog = new Dog(ownerId);
 
     await dog.getDogName();
@@ -134,27 +114,8 @@ app.get("/dog-owner/:id", async function (req, res) {
     await dog.getDogSize();
     await dog.getDogBreed();
 
-    console.log(dog);
-    console.log('THE AGE OF THE DOG IS: ' + dog.age);
-
     res.render('dog', {dog:dog});
 
-});
-
-
-
- // function to test parks model
- app.get("/parks/:id", async function (req, res) {
-    var parkId = req.params.id;
-    // Create a park class with the ID passed
-    var parks = new Area_Parks(parkId);
-    await parks.getParkName();
-    await parks.getAreaID();
-    await parks.getAreaName();
-
-
-    //console.log(parks);
-    res.render('parks', {parks:parks});
 });
 
 // Register
@@ -188,8 +149,7 @@ app.get("/set-profile/:id", async function(req, res) {
     var userId = req.params.id;
     var user = new User(userId);
     var areas = await getarea.getAllAreas();
-    //res.send('set a profile');
-    //res.render('profile', {areas:areas, user:user});
+
     res.render('profile', {areas:areas, user:user, userId});
 });
 
@@ -197,14 +157,6 @@ app.get("/set-profile/:id", async function(req, res) {
 app.get('/login', function (req, res) {
     res.render('login');
 });
-
-// DEPRECATE Create a post route to handle the form submission of the option list
-//app.post('/area-select', function (req, res) {
-    // Retrieve the parameter and redirect to the single student page
-   // id = req.body.ownerParam;
-    //res.redirect('/single-owner/:id');
-//});
-
 
 // Check submitted email and password pair
 app.post('/authenticate', async function (req, res) {
@@ -242,12 +194,10 @@ app.post('/add-details/', function (req, res) {
     params = req.body;
     // Note that we need the id to get update the correct owner
     var owner = new Owner(params.id)
-    console.log(owner);
-    console.log(params.name);
-    console.log(params.id);
     // Adding a try/catch block which will be useful later when we add to the database
     try {
-        owner.addOwnerDetails(params.name, params.email, params.phone).then(result => {
+        owner.addOwnerDetails(params.name, params.email, params.phone, params.areaselect);
+        owner.addDogDetails(params.dogname, params.dogbreed, params.dogsize, params.dogage).then(result => {
             res.redirect('/single-owner/' + params.id);
         })
      } catch (err) {
@@ -255,6 +205,18 @@ app.post('/add-details/', function (req, res) {
      }
 });
 
+
+ // function to test parks model
+ app.get("/parks/:id", async function (req, res) {
+    var parkId = req.params.id;
+    // Create a park class with the ID passed
+    var parks = new Area_Parks(parkId);
+    await parks.getParkName();
+    await parks.getAreaID();
+    await parks.getAreaName();
+
+    res.render('parks', {parks:parks});
+});
 
 
 // Start server on port 3000
