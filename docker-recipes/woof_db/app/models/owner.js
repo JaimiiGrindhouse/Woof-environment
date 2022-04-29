@@ -22,13 +22,28 @@ class Owner {
         this.id = id;
     }
 
-       
+      
+    // Set student name method
+    setOwnerName(name) {
+        this.name = name;
+    }
+
+  // Add a new record to the owners table
+  async addOwner(id) {
+    var sql = "INSERT INTO Owners (id, email) VALUES (? , ?)";
+    const result = await db.query(sql, [this.email, id]);
+    console.log(result.insertId);
+    this.id = result.insertId;
+    this.email = result.insertEmail;
+    return true;
+    }  
+
     // Pulls owner name from db
     async getOwnerName() {
         if (typeof this.name !== 'string') {
             var sql = "SELECT * from owners where person_ID = ?"
             const results = await db.query(sql, [this.id]);
-            this.name = results[0].person_name;
+            this.name = results[0].name;
         }
     }
 
@@ -63,17 +78,39 @@ class Owner {
             console.log(results)
         }
     }
+
+    // Add Owner Details to Profile
+    async addOwnerDetails(name, email, phone) {
+        var sql = "INSERT INTO Owners (person_name, area_id, email, phone_no, person_id) VALUES (?, '4', ?, ?, ?)";
+        const result = await db.query(sql, [name, email, phone, this.id]);
+        // Ensure the Owner properties in the model is up to date
+        this.id = result.insertId;
+        console.log(result)
+        return result;
+    }
+    
+    // Add Dog Details to Profile
+    async addDogDetails(dogName, dogage, dogsize, dogbreed) {
+        var sql = "INSERT INTO Owners (person_name, area_id, email, phone_no, person_id) VALUES (?, '4', ?, ?, ?)";
+        const result = await db.query(sql, [name, email, phone, this.id]);
+        // Ensure the Owner properties in the model is up to date
+        this.id = result.insertId;
+        console.log(result)
+        return result;
+    }
+
+}
     /*
     // LEAVING THIS FUNCTION EMPTY FOR NOW.
     async getOwnerPicture() {
 
     }
     */
-}
+    
 
 
 
 module.exports = {
-    Owner,
+    Owner
     
 }

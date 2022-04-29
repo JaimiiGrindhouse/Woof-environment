@@ -103,6 +103,10 @@ app.get("/single-owner/:id", async function (req, res) {
     var owner = new Owner(ownerId);
     var dog = new Dog(ownerId);
     // Create a Dog class with the ID as an argument 
+    console.log(ownerId);
+    console.log(owner);
+    console.log(dog);
+
 
     //The function will wait for these functions to take the information through SQL queries
     await owner.getOwnerName();
@@ -185,7 +189,8 @@ app.get("/set-profile/:id", async function(req, res) {
     var user = new User(userId);
     var areas = await getarea.getAllAreas();
     //res.send('set a profile');
-    res.render('profile', {areas:areas, user:user});
+    //res.render('profile', {areas:areas, user:user});
+    res.render('profile', {areas:areas, user:user, userId});
 });
 
 // Login
@@ -193,12 +198,12 @@ app.get('/login', function (req, res) {
     res.render('login');
 });
 
-// Create a post route to handle the form submission of the option list
-app.post('/area-select', function (req, res) {
+// DEPRECATE Create a post route to handle the form submission of the option list
+//app.post('/area-select', function (req, res) {
     // Retrieve the parameter and redirect to the single student page
-    id = req.body.studentParam;
-    res.redirect('/single-owner/' + id);
-});
+   // id = req.body.ownerParam;
+    //res.redirect('/single-owner/:id');
+//});
 
 
 // Check submitted email and password pair
@@ -230,6 +235,27 @@ app.get('/logout', function (req, res) {
     req.session.destroy();
     res.redirect('/login');
 });
+
+// Route for adding owner details on the profile page, subsequently posting into database
+app.post('/add-details/', function (req, res) {
+    // Get the submitted values
+    params = req.body;
+    // Note that we need the id to get update the correct owner
+    var owner = new Owner(params.id)
+    console.log(owner);
+    console.log(params.name);
+    console.log(params.id);
+    // Adding a try/catch block which will be useful later when we add to the database
+    try {
+        owner.addOwnerDetails(params.name, params.email, params.phone).then(result => {
+            res.redirect('/single-owner/' + params.id);
+        })
+     } catch (err) {
+         console.error(`Error while adding note `, err.message);
+     }
+});
+
+
 
 // Start server on port 3000
 app.listen(3000,function(){

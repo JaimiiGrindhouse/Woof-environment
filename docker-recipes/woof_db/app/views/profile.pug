@@ -1,25 +1,46 @@
 extends layout 
 block content
+
     h1 Your dog owners profile 
     //- Define a form whose data will be passed to the /area-select route via a POST request
-    form(action='/area-select', method='POST')
+    //- form(action='/area-select', method='POST')
+        //- The POST parameter will be called area
+       //- select(name='areaParam')
+            //- We loop through the areas array, extracting a variable called area
+            //- for area in areas
+                //- we build the option list from the id and name properties on the area object
+               //-  option(value=area.id) #{area.area}
+    
+    
+         
+    form(action='/add-details' method='POST')
+        input(type='hidden' name='id' value=userId)
+        label(for='name') Full Name: 
+        input('name'='name') 
+        label(for='email') Email: 
+        input('name'='email') 
+        label(for='phone') Phone Number: 
+        input('name'='phone')
+
         //- The POST parameter will be called area
         select(name='areaParam')
             //- We loop through the areas array, extracting a variable called area
             for area in areas
                 //- we build the option list from the id and name properties on the area object
                 option(value=area.id) #{area.area}
-
-                
-    form(action='/set-password' method='POST')
-        label(for='email') Full Name: 
-        input('name'='email') 
-        label(for='email') Email: 
-        input('name'='email') 
-        label(for='email') Phone Number: 
-        input('name'='password')
-        <div>
+    
+        
         //- render the submit button
         input(type='submit' value='Submit' class='btn btn-primary')
 
+    //p #{areas}
+    p #{userId}
+    //p #{user}
+
     - console.log(areas)
+    - console.log(userId)
+    - console.log(user)
+
+
+
+

@@ -35,8 +35,6 @@ class User {
         const result = await db.query(sql, [pw, this.id]);
         return true;
     }
-
-
     
     // Add a new record to the users table
     async addUser(password) {
@@ -47,8 +45,8 @@ class User {
         this.id = result.insertId;
         return true;
     }
-
-
+  
+    
     // Test a submitted password against a stored password
     async authenticate(submitted) {
         // Get the stored, hashed password for the user

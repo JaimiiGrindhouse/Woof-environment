@@ -26,7 +26,7 @@ class Area {
 }
 // Gets list of all areas
 async function getAllAreas() {
-    var sql = "SELECT area_ID, area_name from Areas"
+    var sql = "SELECT area_ID, area_name from areas"
     const results = await db.query(sql);
     var areas = [];
     for (var row of results) {
