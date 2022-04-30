@@ -43,7 +43,7 @@ class Owner {
         if (typeof this.name !== 'string') {
             var sql = "SELECT * from owners where person_ID = ?"
             const results = await db.query(sql, [this.id]);
-            this.name = results[0].name;
+            this.name = results[0].person_name;
         }
     }
 
