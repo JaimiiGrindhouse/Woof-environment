@@ -7,14 +7,24 @@ class Area_Parks {
     //park ID
     id;
     //park name
-    name;
+    park;
     //area ID
     area_ID;
     //area name
     area_name;
+    
 
     constructor(id) {
         this.id = id;
+    }
+     // Method to set park name into the area_parks class
+     setParkName(park) {
+        this.park = park;
+    }
+
+    // Method to set park's area_ID into the area_parks class
+    setParkArea(area_ID){
+        this.area_ID = area_ID;
     }
 
     // Pulls park name from db
@@ -44,8 +54,28 @@ class Area_Parks {
             this.area_name = results[0].area_name;
         }
     }
-
 }
+    // Gets list of all parks based on area selection
+    async function getAllParks() {
+        var sql = "SELECT area_ID, park_ID, park_name from area_parks"
+        const results = await db.query(sql);
+        var parks = [];
+        for (var row of results) {
+            // Use our area_parks class to neatly format the object going to the template
+            var park = new Area_Parks (row.park_ID);
+            // Set the area name
+            park.setParkName(row.park_name);//call method to set park name into this class
+            park.setParkArea(row.area_ID);//call method to set area ID into this class 
+            // Push the area_parks class onto area_parks array
+            parks.push(park);
+           
+        }    
+        // Return the array of all parks
+        return parks;
+    }
+
+
 module.exports = {
-    Area_Parks
+    Area_Parks,
+    getAllParks
 }
