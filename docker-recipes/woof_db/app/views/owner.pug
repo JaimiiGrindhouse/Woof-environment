@@ -20,7 +20,7 @@ body(class='container')
     nav(class='navbar fixed-top')
         div(class='row')
             div(class='col')
-                img(src='/images/woof_text_logo_stacked.png' style='width:150px; height:150px;')
+                img(src='/images/woof_text_logo_stacked.png' style='width:91px; height:41px;')
                     
                     
     //APP BODY
@@ -74,17 +74,37 @@ body(class='container')
                         div(class='card-body')
                             div(class='row offset-3 offset-sm-2 offset-lg-3')
                                 h2(class='card-title') Go for a walk!
-                            div(class='row offset-1 offset-sm-1')
-                                div(class='dropdown')
-                                    button(class='btn btn-primary dropdown-toggle' type='button') Choose your Area
+                            
+                            
+                            form(action='/matches' method='POST')
+
                                 div(class='row offset-1 offset-sm-1')
-                                div(class='dropdown')
-                                    button(class='btn btn-primary dropdown-toggle' type='button') Choose your Park
+                                    div(class='dropdown')
+                                        p
+                                        label(for='areaselect') Choose your Area to find a walk:
+                                        //- Create a drop down menu using Select element, and applying dropdown-toggle CSS property     
+                                        select(class='btn btn-primary dropdown-toggle' name='areaselect')
+                                            //- We loop through the areas array, extracting a variable called area
+                                            for area in areas
+                                                //- we build the option list from the id and name properties on the area object
+                                                option(value=area.id) #{area.area}
 
-    
-    
-   
+                                div(class='row offset-1 offset-sm-1')
+                                    div(class='dropdown')
+                                        p
+                                        label(for='parkselect') Choose your Park to find a walk:
+                                        //- Create a drop down menu using Select element, and applying dropdown-toggle CSS property     
+                                        select(class='btn btn-primary dropdown-toggle' name='parkselect')
+                                            //- We loop through the parks array, extracting a variable called park
+                                            for park in parks
+                                                //- we build the option list from the id and name properties on the area object
+                                                option(value=park.id) #{park.park}
+                                
+                                //- render the submit button
+                                div(class='button')
+                                input(type='submit' value='Submit' class='btn btn-primary')
 
+        
     
    
     
