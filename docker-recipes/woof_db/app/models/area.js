@@ -22,8 +22,21 @@ class Area {
         const result = await db.query(sql, [this.id]);
         this.name = result[0].name;
         }
+
+    // Search area matches
+    //async findAreaMatches(areaselect) {
+    //    var sql = "select * from owners where area_ID = ?";
+    //    const result = await db.query(sql, [areaselect]);
+    //    // Ensure the area is as selected
+    //    this.id = result.insertId;
+    //    return result;
+    //}
+
+
     
 }
+
+
 // Gets list of all areas
 async function getAllAreas() {
     var sql = "SELECT area_ID, area_name from areas"

@@ -23,7 +23,7 @@ class Owner {
     }
 
       
-    // Set student name method
+    // Set Owner name method
     setOwnerName(name) {
         this.name = name;
     }
@@ -98,7 +98,22 @@ class Owner {
     }
 }
 
+// Gets list of all Matches
+async function getAllMatches(areaselect) {
+    var sql = sql = "select * from owners where area_ID = ?";
+    const results = await db.query(sql, [areaselect]);
+    var owners = [];
+    for (var row of results) {
+        var owner = [row.area_ID, row.person_ID, row.person_name];
+        owners.push(owner);
+    }    
+    // Return the array of all matching areas
+    return owners;
+}    
+
+
 module.exports = {
-    Owner
+    Owner,
+    getAllMatches
     
 }
