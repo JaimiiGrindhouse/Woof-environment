@@ -43,12 +43,7 @@ function createDropdown(message){
     console.log(dropdown)
 }
 
-
-function parkSelected(ownerID, dogSize){
-
-    //console.log("You've selected: " + park)
-    //console.log("Your ID is: " + ownerID)
-    //console.log("Your dog size is: " + dogSize)
+async function parkSelected(ownerID, dogSize){
 
     const matchingData = {park, ownerID, dogSize};
 
@@ -59,9 +54,13 @@ function parkSelected(ownerID, dogSize){
         },
         body: JSON.stringify(matchingData)
     }
-    
+    const response = await fetch('/matches', options);
+    const json = await response.json();
 
-    fetch('/matches', options)
+    if(json.status == 'success'){
+        window.location = '/matches/' + json.park + '/' + json.ownerID + '/' + json.dogSize
+    }
+    console.log(json);
 }
 
 

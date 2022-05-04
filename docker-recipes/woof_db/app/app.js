@@ -35,6 +35,7 @@ const { User } = require("./models/user");
 
 const getarea = require("./models/area");
 const getParks = require("./models/area_parks")
+const getOwners = require('./models/owner')
 
 
 
@@ -154,9 +155,48 @@ app.get("/dog-owner/:id", async function (req, res) {
 
 });
 
-app.post("/matches" , (req,res) => {
-    console.log(req.body)
+
+
+app.post('/matches' , (req,res) => {
+    const park =    req.body.park
+    const ownerID = req.body.ownerID
+    const dogSize = req.body.dogSize
+
+    
+    res.json({
+            status: 'success',
+            park:park, 
+            ownerID:ownerID,
+            dogSize:dogSize
+        });
 });
+
+app.get('/matches/:park/:ownerID/:dogSize', async function (req,res) {
+
+    var allOwners = await getOwners.getAllOwners();
+   
+   //Delete current user 
+    for(let i=0; i<allOwners.length; i++){
+        if(allOwners[i].person_ID == req.params.ownerID ){
+            allOwners.splice(i,1) 
+        }
+    }
+    //Delete users in fifferent parks 
+    for(let i=0; i<allOwners.length; i++){
+        if(allOwners[i].park == req.params.park){
+            allOwners.splice(i,1) 
+        }
+    }
+    
+
+    console.log(allOwners)
+
+    
+
+    
+
+    res.render('matches', {park:req.params.park, ownerID:req.params.ownerID, dogSize:req.params.dogSize})
+})
 
  // function to test parks model
  app.get("/parks/:id", async function (req, res) {

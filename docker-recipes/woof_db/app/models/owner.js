@@ -70,7 +70,14 @@ class Owner {
     */
 }
 
+async function getAllOwners(){
+    var sql = 'SELECT owners.person_ID, owners.person_name, owners.person_img, owners.email, owners.phone_no, owners.park, dogs.dog_name, dogs.dog_img, dogs.dog_size, dogs.dog_breed, dogs.dog_age FROM owners, dogs WHERE dogs.person_ID = owners.person_ID'
+    const results = await db.query(sql);
+    return results
+}
+
 
 module.exports = {
-    Owner
+    Owner,
+    getAllOwners
 }
