@@ -47,69 +47,10 @@ app.get("/", function(req, res) {
     res.send("Oh hey there world");
 });
 
-// handler 2 - all areas in a json format
-app.get("/all-areas", function(req, res) {
-    sql = 'select * from areas';
-    db.query(sql).then(results => {
-        //console.log(results);
-        res.send(results);
-    });
-});
-
-//handler 3 - all areas formatted in a nice table. 
-app.get("/all-areas-formatted", function(req, res) {
-    sql = 'select * from areas';
-    var output = '<table border="1px">';
-    db.query(sql).then(results => {
-        for (var row of results) {
-            output += '<tr>';
-            output += '<td>' + row.area_ID + '</td>';
-            output += '<td>' + row.area_name + '</td>';
-            output += '</tr>'
-        }
-        output += '</table>';
-        //console.log(output);
-        res.send(output);
-    });
-});
-
-//handler 4 - all owners formatted in a  table. 
-app.get("/all-owners-formatted", function(req, res) {
-    sql = 'select * from owners';
-    var output = '<table border="1px">';
-    db.query(sql).then(results => {
-        for (var row of results) {
-            output += '<tr>';
-            output += '<td>' + row.person_ID + '</td>';
-            output += '<td>' + row.person_name + '</td>';
-            output += '<td>' + row.email + '</td>';
-            output += '<td>' + row.phone_no + '</td>';
-            output += '</tr>'
-        }
-        output += '</table>';
-        //console.log(output);
-        res.send(output);
-    });
-});
-
-/*// this part is not working yet
-app.get("/single-owner/:id", async function (req, res) { // '/:id' has to be :id and not person_ID. I checked it in the console. 
-    var ownerId = req.params.id; // it has to be .id and not person_ID. 
-    var ownerSql = 'SELECT * from owners where person_ID = ?'
-    db.query(ownerSql, [ownerId]).then(results => {
-        console.log(results);
-        res.send(results);
-    });
-
-
-}); 
-*/
 
  // function to test owner model
 app.get("/single-owner/:id", async function (req, res) {
 
-    
-    
     var ownerId = req.params.id;
     // Create an owner class with the ID passed
     var owner = new Owner(ownerId);
@@ -174,43 +115,36 @@ app.post('/matches' , (req,res) => {
 app.get('/matches/:park/:ownerID/:dogSize', async function (req,res) {
 
     var allOwners = await getOwners.getAllOwners();
+    let ownersNoUser = []
+    
    
-   //Delete current user 
+   //Deletes current user 
     for(let i=0; i<allOwners.length; i++){
         if(allOwners[i].person_ID == req.params.ownerID ){
-            allOwners.splice(i,1) 
+            allOwners.splice(i,1);
+        }
+        ownersNoUser = allOwners
+    }
+    //Filters users that are in the same park
+    function filterParks(element){
+        if (element.park == req.params.park){
+            return element
         }
     }
-    //Delete users in fifferent parks 
-    for(let i=0; i<allOwners.length; i++){
-        if(allOwners[i].park == req.params.park){
-            allOwners.splice(i,1) 
+    let filteredParks = ownersNoUser.filter(filterParks)
+
+    function filterSizes(element){
+        if (element.dog_size == req.params.dogSize){
+            return element
         }
     }
-    
+    let filteredParksnSize = filteredParks.filter(filterSizes)
 
-    console.log(allOwners)
+    console.log(filteredParksnSize)
 
-    
-
-    
-
-    res.render('matches', {park:req.params.park, ownerID:req.params.ownerID, dogSize:req.params.dogSize})
+    res.render('matches', {filtered:filteredParksnSize})
 })
 
- // function to test parks model
- app.get("/parks/:id", async function (req, res) {
-    var parkId = req.params.id;
-    // Create a park class with the ID passed
-    var parks = new Area_Parks(parkId);
-    await parks.getParkName();
-    await parks.getAreaID();
-    await parks.getAreaName();
-
-
-    //console.log(parks);
-    res.render('parks', {parks:parks});
-});
 
 // Register
 app.get('/register', function (req, res) {

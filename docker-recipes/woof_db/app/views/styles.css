@@ -21,6 +21,17 @@
     margin-bottom: 30px;
 }
 
+.carousel{
+    margin-top: 100px;
+}
+
+.carousel-control-prev-icon{
+    background-color: grey;
+}
+
+.carousel-control-next-icon{
+    background-color: grey;
+}
 .profile-pic{
     width: 60%;
     border-radius: 100%;
@@ -42,7 +53,6 @@
 }
 
 .button{
-
     margin-top: 20%;
     width: 40%;
 }
