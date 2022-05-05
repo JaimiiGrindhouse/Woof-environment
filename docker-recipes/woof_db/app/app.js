@@ -1,5 +1,18 @@
 // Import express.js
 const express = require("express");
+const multer  = require('multer')
+//const upload = multer({ dest: './static/images'})
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './static/images/' + file.fieldname);
+    },
+    filename: function (req, file, cb) {
+        cb(null, req.body.id + ".jpg");
+    }
+})
+
+const upload = multer({ storage:storage})
 
 // Create express app
 var app = express();
@@ -211,8 +224,9 @@ app.get('/logout', function (req, res) {
 });
 
 // Route for adding owner details on the profile page, subsequently posting into database
-app.post('/add-details/', function (req, res) {
-    // Get the submitted values
+app.post('/add-details/', upload.single ('owners'), async function (req, res) {
+    
+     // Get the submitted values
     params = req.body;
     // Note that we need the id to get update the correct owner
     var owner = new Owner(params.id)
@@ -225,6 +239,9 @@ app.post('/add-details/', function (req, res) {
      } catch (err) {
          console.error(`Error while adding note `, err.message);
      }
+     // req.file is the name of your file in the form above, here 'uploaded_file'
+    // req.body will hold the text fields 
+     console.log(req.file, req.body)
 });
 
 

@@ -5,7 +5,7 @@ block content
 
     //-p #{userId}
          
-    form(action='/add-details' method='POST')
+    form(action='/add-details' method='POST' enctype='multipart/form-data')
     
         input(type='hidden' name='id' value=userId)
     
@@ -18,8 +18,11 @@ block content
         label(for='phone') Phone Number: 
         input('name'='phone')
 
+        label(for ='owners') Upload Profile Picture:
+        input(type='file' name='owners')
+
         //- The POST parameter will be called area
-        label(for='areaselect') Your walking Area:
+        label(for='areaselect') Your Walking Area:
         p     
         select(name='areaselect')
             //- We loop through the areas array, extracting a variable called area
@@ -40,6 +43,9 @@ block content
 
         label(for='dogage') Dog Age: 
         input('name'='dogage')
+
+        label(for ='dogs') Upload Dog Picture:
+        input(type='file' name='dogs')
 
         //- render the submit button
         input(type='submit' value='Submit' class='btn btn-primary')
