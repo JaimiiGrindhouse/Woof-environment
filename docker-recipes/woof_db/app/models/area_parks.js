@@ -68,7 +68,6 @@ class Area_Parks {
             park.setParkArea(row.area_ID);//call method to set area ID into this class 
             // Push the area_parks class onto area_parks array
             parks.push(park);
-           
         }    
         // Return the array of all parks
         return parks;

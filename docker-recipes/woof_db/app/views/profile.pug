@@ -2,26 +2,24 @@ extends layout
 block content
 
     h1 Your Dog Owner Profile
-
-    //-p #{userId}
          
     form(action='/add-details' method='POST' enctype='multipart/form-data')
     
-        input(type='hidden' name='id' value=userId)
+        input(type='hidden' name='id' value=newID)
     
         label(for='name') Full Name: 
         input('name'='name') 
     
         label(for='email') Email: 
-        input('name'='email') 
+        input('name'='email' value=useremail) 
     
         label(for='phone') Phone Number: 
         input('name'='phone')
 
-        label(for ='owners') Upload Profile Picture:
+        label(for ='owners') Upload Profile Picture: 
         input(type='file' name='owners')
 
-        //- The POST parameter will be called area
+        //- The POST parameter will be called areaselect
         label(for='areaselect') Your Walking Area:
         p     
         select(name='areaselect')
