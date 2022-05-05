@@ -67,4 +67,5 @@ npm install bootstrap
 npm install popper
 npm install bcryptjs
 npm install express-session
+npm install --save multer
 docker-compose up --build
