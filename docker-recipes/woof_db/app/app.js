@@ -230,8 +230,8 @@ app.post('/add-details/', cpUpload, async function (req, res) {
     var owner = new Owner(params.id)
     // Adding a try/catch block which will be useful later when we add to the database
     try {
-        await owner.addOwnerDetails(params.name, params.email, params.phone, params.areaselect);
-        await owner.addDogDetails(params.dogname, params.dogbreed, params.dogsize, params.dogage).then(result => {
+        owner.addOwnerDetails(params.name, params.email, params.phone, params.areaselect);
+        owner.addDogDetails(params.dogname, params.dogbreed, params.dogsize, params.dogage).then(result => {
             res.redirect('/single-owner/' + params.id);
         })
      } catch (err) {
