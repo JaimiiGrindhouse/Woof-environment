@@ -83,7 +83,7 @@ body(class='container')
                                         p
                                         label(for='areaselect') Choose your Area to find a walk:
                                         //- Create a drop down menu using Select element, and applying dropdown-toggle CSS property     
-                                        select(class='btn btn-primary dropdown-toggle' name='areaselect')
+                                        select(class='btn btn-secondary dropdown-toggle' name='areaselect')
                                             //- We loop through the areas array, extracting a variable called area
                                             for area in areas
                                                 //- we build the option list from the id and name properties on the area object
@@ -94,15 +94,15 @@ body(class='container')
                                         p
                                         label(for='parkselect') Choose your Park to find a walk:
                                         //- Create a drop down menu using Select element, and applying dropdown-toggle CSS property     
-                                        select(class='btn btn-primary dropdown-toggle' name='parkselect')
+                                        select(class='btn btn-secondary dropdown-toggle' name='parkselect')
                                             //- We loop through the parks array, extracting a variable called park
                                             for park in parks
                                                 //- we build the option list from the id and name properties on the area object
                                                 option(value=park.id) #{park.park}
                                 
                                 //- render the submit button
-                                div(class='button')
-                                input(type='submit' value='Submit' class='btn btn-primary')
+                                div(class='row offset-3 button')
+                                    input(type='submit' value='Submit' class='btn btn-primary')
 
         
     
