@@ -28,11 +28,20 @@ class Owner {
         this.name = name;
     }
 
-  // Add a new record to the owners table
+    // Set Owner email method
+    setOwnerEmail(email) {
+        this.email = email;
+    }    
+
+    // Set Owner phone method
+    setOwnerPhone(phone) {
+        this.phone = phone;
+    }     
+
+  // Add a new record to the owners table (**Depricated**)
   async addOwner(id) {
     var sql = "INSERT INTO Owners (id, email) VALUES (? , ?)";
     const result = await db.query(sql, [this.email, id]);
-    console.log(result.insertId);
     this.id = result.insertId;
     this.email = result.insertEmail;
     return true;
@@ -72,10 +81,9 @@ class Owner {
             JOIN owners o ON a.area_ID = o.area_ID \
             where person_ID = ?"
             const results = await db.query(sql, [this.id]);
-            console.log(results);
             this.area = new Area(results[0].area_name);
             this.area = results[0].area_name;
-            console.log(results)
+            console.log('getownwerarea',results)
         }
     }
 
@@ -98,16 +106,18 @@ class Owner {
     }
 }
 
-// Gets list of all Matches
 async function getAllMatches(areaselect) {
     var sql = sql = "select * from owners where area_ID = ?";
     const results = await db.query(sql, [areaselect]);
     var owners = [];
     for (var row of results) {
-        var owner = [row.area_ID, row.person_ID, row.person_name];
+        var owner = new Owner (row.person_ID);
+        owner.setOwnerName(row.person_name)
+        owner.setOwnerEmail(row.email)
+        owner.setOwnerPhone(row.phone_no)
         owners.push(owner);
-    }    
-    // Return the array of all matching areas
+    } 
+    // Return the array of all matching owners
     return owners;
 }    
 
