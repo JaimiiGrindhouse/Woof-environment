@@ -21,12 +21,28 @@ body(class='container')
             div(class='col')
                 img(src='/images/woof_text_logo_stacked.png' style='width:91px; height:41px;')
                     
-    
-h1 Your Matching Area Walkers
 
+    //APP BODY
+    div(class='container')
+        div(class='app')
+            div(class='row')
+                div(class='col-10 col-sm-20')
+                    h1(class='card-title') Your Matching Dog Walkers
 
-p #{MatchedUserList}
+    table.table.table-striped
+      tr
+        th Name
+        th Email
+        th Phone
+        th 
+        th 
 
-//ul
-  each val in #{MatchedUserList}
-    li= val
+      each n in matchedAreas
+        tr
+          td= n.name
+          td= n.email
+          td= n.phone
+          td
+            img(src='/images/owners/' + n.id + '.jpg' class='img-fluid profile-pic' style='width:100; height:100px;')
+          td
+            img(src='/images/dogs/' + n.id + '.jpg' class='img-fluid profile-pic' style='width:100; height:100px;')

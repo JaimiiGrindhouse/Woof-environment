@@ -142,9 +142,8 @@ app.post('/matches/', async function (req, res) {
     // Get the submitted values
     var params = req.body;
     var matchedAreas = await getowners.getAllMatches(params.areaselect);
-
     //console.log ('matches', params, params.areaselect, matchedAreas);
-    res.render('matcheslist', { MatchedUserList:JSON.stringify(matchedAreas)});
+    res.render('matcheslist', {matchedAreas:matchedAreas});
 });
 
 
@@ -224,15 +223,15 @@ app.get('/logout', function (req, res) {
 
 // Route for adding owner details on the profile page
 // subsequently posting into database and static (cpUpload,images)
-app.post('/add-details/', cpUpload, function (req, res) {
+app.post('/add-details/', cpUpload, async function (req, res) {
      // Get the submitted values
     params = req.body;
     // Note that we need the id to get update the correct owner
     var owner = new Owner(params.id)
     // Adding a try/catch block which will be useful later when we add to the database
     try {
-        owner.addOwnerDetails(params.name, params.email, params.phone, params.areaselect);
-        owner.addDogDetails(params.dogname, params.dogbreed, params.dogsize, params.dogage).then(result => {
+        await owner.addOwnerDetails(params.name, params.email, params.phone, params.areaselect);
+        await owner.addDogDetails(params.dogname, params.dogbreed, params.dogsize, params.dogage).then(result => {
             res.redirect('/single-owner/' + params.id);
         })
      } catch (err) {
