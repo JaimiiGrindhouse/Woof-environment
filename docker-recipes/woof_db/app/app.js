@@ -37,11 +37,6 @@ const getarea = require("./models/area");
 const getParks = require("./models/area_parks")
 const getOwners = require('./models/owner')
 
-
-
-
-
-
 // handler 1 - Create a route for root - /
 app.get("/", function(req, res) {
     res.send("Oh hey there world");
@@ -79,31 +74,11 @@ app.get("/single-owner/:id", async function (req, res) {
    
 });
 
-app.get("/dog-owner/:id", async function (req, res) {
-    var ownerId = req.params.id;
-
-    var dog = new Dog(ownerId);
-
-    await dog.getDogName();
-    await dog.getDogAge();
-    await dog.getDogSize();
-    await dog.getDogBreed();
-
-    //console.log(dog);
-    //console.log('THE AGE OF THE DOG IS: ' + dog.age);
-
-    res.render('dog', {dog:dog});
-
-});
-
-
-
 app.post('/matches' , (req,res) => {
     const park =    req.body.park
     const ownerID = req.body.ownerID
     const dogSize = req.body.dogSize
 
-    
     res.json({
             status: 'success',
             park:park, 
@@ -132,7 +107,7 @@ app.get('/matches/:park/:ownerID/:dogSize', async function (req,res) {
         }
     }
     let filteredParks = ownersNoUser.filter(filterParks)
-
+    //Filters users which dogs are different size 
     function filterSizes(element){
         if (element.dog_size == req.params.dogSize){
             return element
